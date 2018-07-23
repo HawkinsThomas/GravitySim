@@ -3,16 +3,23 @@
 #include <SFML/Graphics.hpp>
 
 
+struct force {
+    float forceX;
+    float forceY;
+};
+
 class Particle
 {
     // member vars
-    int mass;
+    uint64_t mass;
     float positionX;
     float positionY;
     float velocityX;
     float velocityY;
     float accelerationX = 0; //default acceleration to 0
     float accelerationY = 0;
+    float forceX = 0; //default forces to zero
+    float forceY = 0;
     sf::CircleShape shape;
 
 private:
@@ -22,7 +29,7 @@ private:
     void set_radius()
     {
         const double pi = 3.14159;
-        float radius = sqrt(mass * 0.75 / pi) / 5;
+        float radius = sqrt(mass * 0.75 / pi) / 200;
         shape.setRadius(radius);
     }
 
@@ -33,17 +40,17 @@ private:
 
     void set_shape_position()
     {
-        shape.setPosition(positionX, positionY);
+        shape.setPosition(positionX - shape.getRadius(), positionY - shape.getRadius());
     }
 
-    void accelerate(float force_x, float force_y);
+    
 public:
 
     // default constructor takes no paramters
     Particle();
 
     //constructor with args
-    Particle(int u_mass, float u_positionX, float u_positionY, float u_velocityX = 0.f, float u_velocityY = 0.f, sf::Color u_color = sf::Color::Green); //declare default parameters in header file
+    Particle(uint64_t u_mass, float u_positionX, float u_positionY, float u_velocityX = 0.f, float u_velocityY = 0.f, sf::Color u_color = sf::Color::Green); //declare default parameters in header file
 
     // get mass of particle
     int get_mass();
@@ -61,7 +68,22 @@ public:
     //get shape object
     sf::CircleShape get_shape();
 
-    void attract(Particle othershape);
+    // use this to reset the force to 0
+    void set_force(force new_force) 
+    {
+        forceX = new_force.forceX;
+        forceY = new_force.forceY;
+    }
+
+    // use this to sum all forces on a particle
+    void add_force(force attraction_force)
+    {
+        forceX += attraction_force.forceX;
+        forceY += attraction_force.forceY;
+    }
+    void accelerate();
 
     void move(); 
+
+    void set_radius(float radius);
 };

@@ -4,15 +4,17 @@
 #include "stdafx.h"
 #include <SFML/Graphics.hpp>
 #include "Particle.h"
+#include "Engine.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML works!");
-    //sf::CircleShape shape(50.f);
-    //shape.setFillColor(sf::Color::Red);
+    Engine engine{20};
+    Particle sun{ 2000000000000, 500, 500, 0, 0, sf::Color::Yellow };
+    sun.set_radius(10);
+    Particle &sun_ref = sun;
+    engine.add_particle(sun_ref);
 
-    Particle particle_0{ 1000, 10,10, 0.01f, 0.01f };
-    Particle particle_1{ 500000, 500, 500, 0, 0 };
+    sf::RenderWindow window = { sf::VideoMode(1000, 1000), "Grav Sim!" }; // graphics window
 
     while (window.isOpen())
     {
@@ -25,12 +27,14 @@ int main()
 
 
         window.clear();
-        particle_0.attract(particle_1);
-        particle_1.attract(particle_0);
-        particle_0.move();
-        particle_1.move();
-        window.draw(particle_0.get_shape());
-        window.draw(particle_1.get_shape());
+        
+        engine.move_particles();
+
+        for (auto particle : engine.get_particles())
+        {
+            window.draw(particle.get_shape());
+        }
+        
         window.display();
     }
 
