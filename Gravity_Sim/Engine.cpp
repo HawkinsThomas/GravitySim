@@ -45,6 +45,7 @@ force Engine::calculate_force(Particle particle1, Particle particle2)
 //Generate a new particle object
 Particle Engine::generate_particle()
 {
+    //generate a particle with "random" arguements
     Particle particle { static_cast <uint64_t> (rand() % 500 * 1500), static_cast <float> (fmod(rand(), 1900)), static_cast <float> (fmod(rand(), 1000)), (static_cast <float> (fmod(rand(), 1000)) / 10000) - 0.05f, (static_cast <float> (fmod(rand(), 1000)) / 10000) - 0.05f };
     return particle;
 }
@@ -84,7 +85,7 @@ void Engine::move_particles()
 
     for (int k = 0 ; k < particles.size(); k++)
     {
-        if (particles[k].get_delete_flag() == true)
+        if (particles[k].get_delete_flag() == true)//delete a particle from particles vector if it was absorbed in a collision
         {
             particles.erase(particles.begin() + k);
         }

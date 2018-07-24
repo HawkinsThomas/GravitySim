@@ -9,7 +9,7 @@
 
 int main()
 {
-    Engine engine{100};
+    Engine engine{5};
     //Particle sun{ 15000000000000000000, 500, 500, 0, 0, sf::Color::Yellow };
     //sun.set_radius(10);
     //Particle &sun_ref = sun;
