@@ -5,16 +5,17 @@
 #include <SFML/Graphics.hpp>
 #include "Particle.h"
 #include "Engine.h"
+#include <iostream>
 
 int main()
 {
-    Engine engine{20};
-    Particle sun{ 2000000000000, 500, 500, 0, 0, sf::Color::Yellow };
-    sun.set_radius(10);
-    Particle &sun_ref = sun;
-    engine.add_particle(sun_ref);
+    Engine engine{30};
+    //Particle sun{ 15000000000000000000, 500, 500, 0, 0, sf::Color::Yellow };
+    //sun.set_radius(10);
+    //Particle &sun_ref = sun;
+    //engine.add_particle(sun_ref);
 
-    sf::RenderWindow window = { sf::VideoMode(1000, 1000), "Grav Sim!" }; // graphics window
+    sf::RenderWindow window = { sf::VideoMode(1900, 1000), "Grav Sim!" }; // graphics window
 
     while (window.isOpen())
     {
@@ -26,7 +27,7 @@ int main()
         }
 
 
-        window.clear();
+        window.clear(); //delete all objects on canvas
         
         engine.move_particles();
 
@@ -34,7 +35,7 @@ int main()
         {
             window.draw(particle.get_shape());
         }
-        
+        //std::cout << engine.get_particles().size() << "\n";
         window.display();
     }
 

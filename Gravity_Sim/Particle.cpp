@@ -78,3 +78,13 @@ sf::CircleShape Particle::get_shape()
     return shape;
 }
 
+void Particle::absorb(Particle &particle)
+{
+    //90% of kinetic energy is conserverd in collision
+    velocityX = 0.9 * ((mass * velocityX) + (particle.get_mass() * particle.velocityX)) / (mass + particle.get_mass()); //calculate new x velocity from inelastic colision
+    velocityY = 0.9 * ((mass * velocityY) + (particle.mass * particle.velocityY)) / (mass + particle.mass); //calculate new y velocity from inelastic colision
+    mass += particle.get_mass(); //add masses together
+    set_radius();   // set the new radius
+    set_color(sf::Color::Magenta);
+    particle.set_delete_flag();
+}

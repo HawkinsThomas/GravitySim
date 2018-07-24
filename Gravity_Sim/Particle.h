@@ -21,6 +21,7 @@ class Particle
     float forceX = 0; //default forces to zero
     float forceY = 0;
     sf::CircleShape shape;
+    bool delete_flag = false;
 
 private:
 
@@ -29,7 +30,7 @@ private:
     void set_radius()
     {
         const double pi = 3.14159;
-        float radius = sqrt(mass * 0.75 / pi) / 200;
+        float radius = sqrt(mass * 0.75 / pi) / 100; //radius is proportional to mass
         shape.setRadius(radius);
     }
 
@@ -86,4 +87,16 @@ public:
     void move(); 
 
     void set_radius(float radius);
+
+    void absorb(Particle &particle);
+
+    void set_delete_flag()
+    {
+        delete_flag = true;
+    }
+
+    bool get_delete_flag()
+    {
+        return delete_flag;
+    }
 };
