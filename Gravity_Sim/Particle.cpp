@@ -85,6 +85,20 @@ void Particle::absorb(Particle &particle)
     velocityY = 0.9 * ((mass * velocityY) + (particle.mass * particle.velocityY)) / (mass + particle.mass); //calculate new y velocity from inelastic colision
     mass += particle.get_mass(); //add masses together
     set_radius();   // set the new radius
-    set_color(sf::Color::Magenta);
+    collision_count += 1;
+    collision_count += particle.collision_count;
+    if (collision_count == 1)
+    {
+        set_color(sf::Color::Magenta);
+    }
+    else if (collision_count == 2)
+    {
+        set_color(sf::Color::Red);
+    }
+    else if (collision_count >= 3)
+    {
+        set_color(sf::Color::Yellow);
+    }
+    
     particle.set_delete_flag();
 }

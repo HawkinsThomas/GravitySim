@@ -21,6 +21,7 @@ class Particle
     float forceX = 0; //default forces to zero
     float forceY = 0;
     sf::CircleShape shape;
+    int collision_count = 0;
     bool delete_flag = false;
 
 private:
