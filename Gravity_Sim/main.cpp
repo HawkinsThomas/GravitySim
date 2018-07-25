@@ -10,7 +10,7 @@
 int main()
 {
     const int number_of_particles = 1; 
-    Engine engine{200};
+    Engine engine{250};
     //Particle sun{ 15000000000000000000, 500, 500, 0, 0, sf::Color::Yellow };
     //sun.set_radius(3);
     //Particle &sun_ref = sun;

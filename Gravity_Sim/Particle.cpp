@@ -124,7 +124,7 @@ void Particle::absorb(Particle &particle)
     }
     else if (collision_count <= 100)
     {
-        set_color(sf::Color::Yellow);
+        set_color(sf::Color::Green);
     }
     else
     {

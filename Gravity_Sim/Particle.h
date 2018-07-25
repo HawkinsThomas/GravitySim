@@ -61,7 +61,7 @@ public:
     Particle();
 
     //constructor with args
-    Particle(int u_mass, float u_positionX, float u_positionY, float u_velocityX = 0.f, float u_velocityY = 0.f, sf::Color u_color = sf::Color::Green); //declare default parameters in header file
+    Particle(int u_mass, float u_positionX, float u_positionY, float u_velocityX = 0.f, float u_velocityY = 0.f, sf::Color u_color = sf::Color::White); //declare default parameters in header file
 
     // get mass of particle
     int get_mass();
