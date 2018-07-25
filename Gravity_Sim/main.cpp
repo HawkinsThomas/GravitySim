@@ -9,13 +9,14 @@
 
 int main()
 {
-    Engine engine{5};
+    const int number_of_particles = 1; 
+    Engine engine{200};
     //Particle sun{ 15000000000000000000, 500, 500, 0, 0, sf::Color::Yellow };
-    //sun.set_radius(10);
+    //sun.set_radius(3);
     //Particle &sun_ref = sun;
     //engine.add_particle(sun_ref);
 
-    sf::RenderWindow window = { sf::VideoMode(1900, 1000), "Grav Sim!" }; // graphics window
+    sf::RenderWindow window = { sf::VideoMode(1920, 1000), "Grav Sim!" }; // graphics window
 
     while (window.isOpen())
     {
@@ -26,7 +27,11 @@ int main()
                 window.close();
         }
 
-
+        if (engine.get_particles().size() < number_of_particles)
+        {
+            Particle new_particle = engine.generate_particle();
+            engine.add_particle(new_particle);
+        }
         window.clear(); //delete all objects on canvas
         
         engine.move_particles();

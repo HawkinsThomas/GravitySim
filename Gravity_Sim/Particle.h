@@ -11,7 +11,7 @@ struct force {
 class Particle
 {
     // member vars
-    uint64_t mass;
+    int mass;
     float positionX;
     float positionY;
     float velocityX;
@@ -31,7 +31,16 @@ private:
     void set_radius()
     {
         const double pi = 3.14159;
-        float radius = sqrt(mass * 0.75 / pi) / 100; //radius is proportional to mass
+        float radius = sqrt(mass * 0.25 / pi) / 150; //radius is proportional to mass
+        if (radius > 10)
+        {
+            radius = 10;
+        }
+
+        else if (radius < 1)
+        {
+            radius = 1;
+        }
         shape.setRadius(radius);
     }
 
@@ -52,7 +61,7 @@ public:
     Particle();
 
     //constructor with args
-    Particle(uint64_t u_mass, float u_positionX, float u_positionY, float u_velocityX = 0.f, float u_velocityY = 0.f, sf::Color u_color = sf::Color::Green); //declare default parameters in header file
+    Particle(int u_mass, float u_positionX, float u_positionY, float u_velocityX = 0.f, float u_velocityY = 0.f, sf::Color u_color = sf::Color::Green); //declare default parameters in header file
 
     // get mass of particle
     int get_mass();

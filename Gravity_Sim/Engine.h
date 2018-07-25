@@ -14,8 +14,6 @@ class Engine
     
 private:
 
-    Particle generate_particle();
-
     // calculate the gravitational force between two particles
     force calculate_force(Particle particle1, Particle particle2);
 
@@ -29,5 +27,6 @@ public:
 
      void add_particle(Particle &particle); //add a particle object to particle member vector
 
+     Particle generate_particle();
 
 };
